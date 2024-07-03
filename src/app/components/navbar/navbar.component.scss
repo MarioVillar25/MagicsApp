@@ -1,17 +1,69 @@
+/* Tags Styles */
+
 nav {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 2vh 15vw;
+  padding: 2vh 23vw;
   background-color: var(--dark-blue);
+}
 
-  .lupaLogo{
-    filter: invert(1);
+input {
+  padding: 5px;
+  background: none;
+  border: 1px none;
+  color: white;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+  color: white;
+}
+
+/* Classes Styles */
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .navContainer_buscador {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .navContainer_buscador--lupa {
+      filter: invert(1);
+      margin-left: 3px;
+    }
+
+    .navContainer_buscador--magicLogo {
+      border-radius: 50%;
+      border: 2px solid transparent;
+    }
+
+    .navContainer_buscador--magicLogo:hover {
+      border: 2px solid white;
+      cursor: pointer;
+    }
   }
 
-  input{
-    background: none;
-    border: 1px none;
-  }
+  .navContainer_colores {
+    display: flex;
+    gap: 15px;
+    color: white;
 
+    p {
+      margin: 0;
+    }
+
+    img {
+      filter: brightness(2);
+      border-radius: 50%;
+      border: 2px solid transparent;
+    }
+
+    img:hover {
+      border: 2px solid white;
+      cursor: pointer;
+    }
+  }
 }

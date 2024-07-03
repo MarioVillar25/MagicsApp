@@ -1,0 +1,43 @@
+/* Tags Styles */
+
+h1 {
+  font-size: 0.8rem;
+  margin: 0;
+  color: rgb(148, 148, 148);
+}
+
+hr {
+  width: 150px;
+  margin: 0;
+  margin: 5px 0px;
+  opacity: 5;
+  color: rgb(148, 148, 148);
+}
+
+/* Classes Styles */
+
+.footerContainer {
+  padding: 8vh 23vw;
+  background-color: var(--dark-blue);
+  color: var(--dark-white);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  p {
+    margin: 0;
+    font-size: 0.7rem;
+  }
+
+  .footerContainer__sections {
+    display: flex;
+    gap: 15px;
+  }
+
+  .footerContainer__copyrightText {
+    color: var(--dark-gray);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
