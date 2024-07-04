@@ -3,7 +3,7 @@ import { FilterComponent } from '../../components/filter/filter.component';
 import { CardComponent } from '../../components/card/card.component';
 import { ResultsComponent } from '../../components/results/results.component';
 import { CardsService } from '../../services/cards.service';
-import { Card } from '../../interfaces/cards.interface';
+import { Card, Cards } from '../../interfaces/cards.interface';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -14,19 +14,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cards-list.component.scss',
 })
 export class CardsListComponent implements OnInit {
-  public cards: Card[] = [];
+  public cards: Card[]= [] ;
 
   constructor(private cardsService: CardsService) {}
 
   ngOnInit(): void {
     this.getAllCards();
-    console.log(this.cards);
   }
 
   public getAllCards(): void {
     this.cardsService.getAllCards().subscribe((cardsData) => {
-      this.cards = cardsData;
-      console.log(cardsData);
+      this.cards = cardsData.cards;
+      //console.log(cardsData.cards);
     });
   }
 }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Card } from '../../interfaces/cards.interface';
 
 @Component({
   selector: 'app-card',
@@ -8,4 +9,13 @@ import { RouterLink } from '@angular/router';
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
 })
-export class CardComponent {}
+export class CardComponent {
+  @Input() public card!: Card;
+
+  constructor(){}
+
+
+
+
+
+}

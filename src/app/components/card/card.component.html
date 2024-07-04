@@ -1,4 +1,8 @@
-<div class="card" routerLink="/card-page/2"
->
-   <img src="../../../assets/images/test_card.jpg" alt="" />
+<div class="card" [routerLink]="['card-page', card.id]">
+  <img
+    [src]="
+      card.imageUrl ? card.imageUrl : '../../../assets/images/reversoCarta.png'
+    "
+    alt="img"
+  />
 </div>

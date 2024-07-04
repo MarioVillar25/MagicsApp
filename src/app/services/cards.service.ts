@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Card } from '../interfaces/cards.interface';
+import { Cards } from '../interfaces/cards.interface';
 import { environments } from '../../environments/environments';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
+import { CardId } from '../interfaces/cardId.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,13 @@ export class CardsService {
 
   //* FUNCIONES PARA LLAMADAS A LA API
 
-  public getAllCards(): Observable<Card[]> {
-    return this.http.get<Card[]>(`${this.baseUrl}`);
+  public getAllCards(): Observable<Cards> {
+    return this.http.get<Cards>(`${this.baseUrl}`);
+  }
+
+  public getCardById(id: string): Observable<CardId | undefined> {
+    return this.http
+      .get<CardId>(`${this.baseUrl}/${id}`)
+      .pipe(catchError((error) => of(undefined)));
   }
 }

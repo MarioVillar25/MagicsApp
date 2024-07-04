@@ -3,8 +3,8 @@
 
 <section>
   <div class="cardsContainer">
-    <ng-container *ngFor="let card of cards">
-      <app-card></app-card>
+    <ng-container>
+      <app-card [card]="card" *ngFor="let card of cards"></app-card>
     </ng-container>
   </div>
 </section>

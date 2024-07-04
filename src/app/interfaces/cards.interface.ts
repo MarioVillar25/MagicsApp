@@ -1,3 +1,6 @@
+export interface Cards {
+  cards: Card[];
+}
 
 export interface Card {
   name:          string;

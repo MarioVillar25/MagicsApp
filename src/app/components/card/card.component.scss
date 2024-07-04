@@ -1,8 +1,8 @@
 /* Classes Styles */
 
 .card {
-  width: 180px;
-  height: 260px;
+  width: 227px;
+  height: 310px;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
@@ -17,4 +17,14 @@
 
 .card:hover {
   transform: scale(1.03);
+}
+
+/* Media Queries */
+
+@media (width <= 1316px) {
+  section {
+    > div {
+      padding: 4vh 13vw;
+    }
+  }
 }

@@ -1,1 +1,154 @@
-<p>card-page works!</p>
+<div class="HTMLContainer">
+  <section *ngIf="card">
+    <div class="cardContainer">
+      <div class="cardContainer_cardInfo">
+        <img
+          class="cardContainer_cardInfo--imgCard"
+          [src]="
+            card.imageUrl
+              ? card.imageUrl
+              : '../../../assets/images/reversoCarta.png'
+          "
+          alt="img"
+        />
+
+        <div class="cardContainer_cardInfo--descriptions">
+          <div>
+            <div>
+              <h4>{{ card.name }}</h4>
+            </div>
+          </div>
+          <hr />
+          <div>
+            <p>{{ card.type }}</p>
+          </div>
+          <hr />
+          <div>
+            <p>{{ card.text }}</p>
+          </div>
+          <hr />
+          <div>
+            <p>Illustrated by {{ card.artist }}</p>
+          </div>
+          <hr />
+          <div class="cardContainer_cardInfo--descriptions--legalContainer">
+            <div
+              *ngFor="let legality of card.legalities"
+              class="cardContainer_cardInfo--descriptions--legalContainer--legal"
+            >
+              <span>{{ legality.legality | uppercase }}</span>
+              <p>{{ legality.format }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cardContainer_cardInfo--languages">
+          <div class="cardContainer_cardInfo--languages--header">
+            <img
+              class="cardContainer_cardInfo--languages--header--logo"
+              src="../../../assets/icons/red_color.png"
+              alt=""
+            />
+            <div class="cardContainer_cardInfo--languages--header--text">
+              <h2>Born of the Gods (BNG)</h2>
+              <span>#1 Uncommon - English - Nonfoil/Foil</span>
+            </div>
+          </div>
+          <div class="cardContainer_cardInfo--languages--buttonLanguages">
+            <button>EN</button>
+            <button>ES</button>
+            <button>FR</button>
+            <button>UC</button>
+            <button>KO</button>
+            <button>AF</button>
+            <button>AF</button>
+            <button>AF</button>
+            <button>AF</button>
+            <button>AF</button>
+            <button>AF</button>
+            <button>:</button>
+
+          </div>
+          <div class="cardContainer_cardInfo--languages--prints">
+            <p>PRINTS</p>
+            <div>
+              <p>USD</p>
+              <p>EUR</p>
+              <p>TIX</p>
+            </div>
+          </div>
+          <div class="cardContainer_cardInfo--languages--printsInfo">
+            <p>Born of the Gods</p>
+            <div>
+              <p>$0.08</p>
+              <p>$0.11</p>
+              <span>0.03</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr />
+
+  <section>
+    <div>
+      <p>toolboxess</p>
+    </div>
+  </section>
+  <hr />
+
+  <section>
+    <div>
+      <h2>NOTES AND RULES INFORMATION FOR {{ card?.artist | uppercase }}</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum corporis
+        vero explicabo nesciunt accusantium animi voluptatibus natus sapiente
+        nisi impedit. Sapiente illum dolorem perspiciatis rem amet tenetur,
+        eaque repellendus beatae obcaecati quod dolores nulla modi consequuntur
+        voluptas dicta aliquam, accusamus similique hic ipsum, cum impedit eum
+        perferendis numquam! Blanditiis fuga minima esse, facilis dicta quasi,
+        atque exercitationem voluptates harum explicabo laudantium, optio
+        dolores beatae quisquam commodi. Eligendi, accusamus corrupti blanditiis
+        magnam vel at hic voluptas commodi facere eaque dignissimos numquam
+        voluptate quos illum eveniet atque labore dolorem fugiat aliquam natus
+        nesciunt debitis. Quo quos aliquid nulla eos blanditiis velit voluptatum
+        incidunt nesciunt neque beatae repudiandae debitis quia a placeat,
+        commodi ratione recusandae quibusdam accusamus molestias reiciendis
+        corporis. Obcaecati soluta optio sapiente facilis tenetur iusto possimus
+        doloremque eius dolorum. Quasi recusandae autem dolorum consequatur
+        explicabo eligendi facere architecto molestiae, libero cumque
+        accusantium, impedit voluptas odio vitae soluta cum commodi sequi? Quis
+        nihil eius optio dicta, error repellat. Alias numquam tempore vero
+        molestias dicta tenetur facere! Et iste accusantium quisquam, non dicta
+        distinctio quasi possimus temporibus aut iure voluptatibus expedita a
+        porro voluptatum ex quibusdam! Veritatis, sit dignissimos deleniti
+        quaerat sunt id quidem itaque, tempore fugit veniam odio sapiente illum
+        eaque at vero eius distinctio non! Quia, alias? Voluptates, ipsam
+        tempora, doloremque illum iure obcaecati ipsa saepe perferendis
+        recusandae dolorum quaerat vitae quod? Aspernatur, officiis. Unde
+        accusamus magni provident voluptatem. Delectus rerum, repellat,
+        veritatis repudiandae blanditiis eaque repellendus cum quidem autem,
+        eligendi iure. Nostrum nam, modi aliquid natus vitae, provident impedit
+        autem quo fugit sed reiciendis sapiente rerum necessitatibus officia,
+        aut accusamus inventore dolor quos dolorem eum aliquam ad placeat ea.
+        Natus unde aperiam illum assumenda cumque, magni pariatur quasi vel
+        necessitatibus, sapiente molestiae, quam error? Minus, corrupti ex!
+        Aperiam, accusamus expedita ea reprehenderit impedit voluptas libero cum
+        officiis adipisci esse veritatis inventore deleniti dolore architecto
+        laboriosam nihil ipsam. Tempora doloremque cum quos architecto alias
+        repudiandae consequuntur labore unde autem explicabo. Ad aspernatur
+        aliquid labore repellendus dolores cumque illum voluptate perferendis ab
+        nisi. Similique illum beatae doloribus, delectus iure nam quas! Sit
+        cupiditate qui, delectus quidem ab numquam excepturi ex id maxime
+        architecto autem. A magnam iste animi aspernatur rem eum maxime
+        reiciendis ducimus fugit, corporis unde dolorum neque amet molestias
+        beatae architecto aliquam libero, praesentium quibusdam. Suscipit nobis
+        dolore aliquam veritatis neque asperiores animi quod facilis explicabo
+        doloremque. Debitis repellendus dolores assumenda perspiciatis,
+        dignissimos corrupti optio cupiditate, laudantium doloremque minus
+        error.
+      </p>
+    </div>
+  </section>
+</div>
