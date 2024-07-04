@@ -1,15 +1,21 @@
 /* Tags Styles */
 
 nav {
-  padding: 2vh 23vw;
+  padding: 1vh 23vw;
   background-color: var(--dark-blue);
 }
 
 input {
   padding: 5px;
+  padding-bottom: 3px;
   background: none;
   border: 1px none;
   color: white;
+  font-size: 0.9rem;
+  //background-color: red;
+  width: 35vw;
+
+
 }
 
 textarea:focus,
@@ -67,3 +73,13 @@ input:focus {
     }
   }
 }
+
+
+/* Media Queries */
+
+@media (width <= 1316px) {
+  nav {
+    padding: 1vh 13vw;
+  }
+}
+

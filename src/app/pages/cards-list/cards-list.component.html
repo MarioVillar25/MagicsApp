@@ -1,1 +1,12 @@
-<p>cards-list works!</p>
+<app-filter></app-filter>
+<app-results></app-results>
+
+<section>
+  <div class="cardsContainer">
+    <ng-container *ngFor="let card of cards">
+      <app-card></app-card>
+    </ng-container>
+  </div>
+</section>
+
+<app-filter></app-filter>

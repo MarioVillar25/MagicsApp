@@ -1,0 +1,16 @@
+/* Classes Styles */
+
+.cardsContainer {
+  padding: 4vh 23vw;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+/* Media Queries */
+
+@media (width <= 1316px) {
+  .cardsContainer {
+    padding: 4vh 13vw;
+  }
+}

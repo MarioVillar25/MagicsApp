@@ -17,7 +17,7 @@ hr {
 /* Classes Styles */
 
 .footerContainer {
-  padding: 8vh 23vw;
+  padding: 4vh 23vw;
   background-color: var(--dark-blue);
   color: var(--dark-white);
   display: flex;
@@ -31,6 +31,7 @@ hr {
 
   .footerContainer__sections {
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
   }
 
@@ -41,3 +42,13 @@ hr {
     gap: 10px;
   }
 }
+
+
+/* Media Queries */
+
+@media (width <= 1316px) {
+  .footerContainer {
+    padding: 4vh 13vw;
+  }
+}
+

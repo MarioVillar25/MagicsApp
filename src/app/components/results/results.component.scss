@@ -1,0 +1,23 @@
+section {
+  padding: 1vh 23vw;
+  background-color: var(--soft-white-blue);
+  border-bottom: 1px solid #0000001f;
+}
+
+p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: green;
+}
+
+span {
+  color: rgb(0, 81, 255);
+}
+
+/* Media Queries */
+
+@media (width <= 1316px) {
+  section {
+    padding: 1vh 13vw;
+  }
+}
