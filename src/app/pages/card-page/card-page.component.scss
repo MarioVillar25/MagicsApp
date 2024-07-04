@@ -18,12 +18,25 @@ section {
 
   .cardContainer_cardInfo {
     display: flex;
+    justify-content: space-between;
+    > div {
+      width: 50%;
+    }
+
+    .cardContainer_cardInfo--imgCardContainer {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    display: flex;
 
     .cardContainer_cardInfo--imgCard {
-      width: 640px;
+      //width: 640px;
+      //height: 100%;
       box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
         rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-      border-radius: 15px;
+      border-radius: 20px;
+      overflow: hidden;
     }
 
     .cardContainer_cardInfo--descriptions {
@@ -62,7 +75,6 @@ section {
           display: flex;
           align-items: center;
           gap: 10px;
-          //width: 70%;
 
           span {
             padding: 5px 25px;
@@ -80,12 +92,13 @@ section {
       }
     }
 
-
-    .cardContainer_cardInfo--languages{
+    .cardContainer_cardInfo--languages {
       display: flex;
       flex-direction: column;
+      font-size: 0.8rem;
+      margin-bottom: 15px;
 
-      .cardContainer_cardInfo--languages--header{
+      .cardContainer_cardInfo--languages--header {
         padding: 10px;
         display: flex;
         align-items: center;
@@ -93,55 +106,52 @@ section {
         background-color: var(--dark-blue);
         color: white;
 
-        .cardContainer_cardInfo--languages--header--logo{
+        .cardContainer_cardInfo--languages--header--logo {
           width: 30px;
           height: 30px;
         }
 
-        .cardContainer_cardInfo--languages--header--text{
+        .cardContainer_cardInfo--languages--header--text {
           display: flex;
           flex-direction: column;
-          h2{
+          h2 {
             font-size: 1rem;
+            margin: 0;
           }
         }
-
       }
 
-      .cardContainer_cardInfo--languages--buttonLanguages{
+      .cardContainer_cardInfo--languages--buttonLanguages {
         padding: 10px 0px;
         display: flex;
+        flex-wrap: wrap;
+
         gap: 5px;
-        button{
+        button {
           background-color: var(--dark-blue);
           color: white;
           border: 1px solid transparent;
-
-
-
         }
       }
 
-      .cardContainer_cardInfo--languages--prints{
+      .cardContainer_cardInfo--languages--prints {
         padding: 10px;
         display: flex;
         justify-content: space-between;
         background-color: var(--dark-blue);
         color: white;
 
-        >div{
+        > div {
           display: flex;
           gap: 10px;
         }
 
-        p{
+        p {
           margin: 0px;
         }
-
-
       }
 
-      .cardContainer_cardInfo--languages--printsInfo{
+      .cardContainer_cardInfo--languages--printsInfo {
         background-color: rgb(234, 234, 255);
         border-bottom: 4px solid var(--dark-blue);
 
@@ -149,33 +159,19 @@ section {
         display: flex;
         justify-content: space-between;
 
-        >div{
+        > div {
           display: flex;
           gap: 10px;
         }
 
-        p{
+        p {
           margin: 0px;
         }
-        span{
+        span {
           color: yellowgreen;
         }
       }
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
   }
 }
 
