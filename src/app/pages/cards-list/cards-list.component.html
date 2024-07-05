@@ -1,12 +1,25 @@
-<app-filter></app-filter>
-<app-results></app-results>
+<ng-container *ngIf="cards.length > 0; else loadingCards">
+  <app-filter></app-filter>
+  <app-results></app-results>
 
-<section>
-  <div class="cardsContainer">
-    <ng-container>
-      <app-card [card]="card" *ngFor="let card of cards"></app-card>
-    </ng-container>
-  </div>
-</section>
+  <section>
+    <div class="cardsContainer">
+      <ng-container>
+        <app-card [card]="card" *ngFor="let card of cards"></app-card>
+      </ng-container>
+    </div>
+  </section>
 
-<app-filter></app-filter>
+  <app-filter></app-filter>
+</ng-container>
+
+<ng-template #loadingCards>
+  <section>
+    <div class="loadingContainer">
+      <img src="../../../assets/animations/loader.svg" alt="" />
+      <h1>Loading Card...</h1>
+    </div>
+  </section>
+
+
+</ng-template>

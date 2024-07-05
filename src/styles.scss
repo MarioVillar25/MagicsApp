@@ -24,3 +24,26 @@ body {
 .error {
   color: red;
 }
+
+
+
+.loadingContainer{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  gap: 20px;
+  h1{
+    font-size: 1.2rem;
+    margin-left: 15px;
+    font-weight: bold;
+  }
+  img{
+    width: 100px;
+    filter: invert(1);
+  }
+
+
+}
