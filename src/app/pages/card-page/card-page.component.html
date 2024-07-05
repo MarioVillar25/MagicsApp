@@ -23,8 +23,8 @@
                 alt=""
               />
               <div class="cardContainer_cardInfo--languages--header--text">
-                <h2>Born of the Gods (BNG)</h2>
-                <span>#1 Uncommon - English - Nonfoil/Foil</span>
+                <h2>{{card.setName}} ({{card.set}})</h2>
+                <span>#{{card.number}} {{card.rarity}} - {{card.foreignNames[0].language}} - {{card.layout}} </span>
               </div>
             </div>
             <div class="cardContainer_cardInfo--languages--buttonLanguages">
@@ -254,57 +254,15 @@
   </section>
   <hr />
 
-  <section>
-    <div>
-      <h2>NOTES AND RULES INFORMATION FOR {{ card?.artist | uppercase }}</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum corporis
-        vero explicabo nesciunt accusantium animi voluptatibus natus sapiente
-        nisi impedit. Sapiente illum dolorem perspiciatis rem amet tenetur,
-        eaque repellendus beatae obcaecati quod dolores nulla modi consequuntur
-        voluptas dicta aliquam, accusamus similique hic ipsum, cum impedit eum
-        perferendis numquam! Blanditiis fuga minima esse, facilis dicta quasi,
-        atque exercitationem voluptates harum explicabo laudantium, optio
-        dolores beatae quisquam commodi. Eligendi, accusamus corrupti blanditiis
-        magnam vel at hic voluptas commodi facere eaque dignissimos numquam
-        voluptate quos illum eveniet atque labore dolorem fugiat aliquam natus
-        nesciunt debitis. Quo quos aliquid nulla eos blanditiis velit voluptatum
-        incidunt nesciunt neque beatae repudiandae debitis quia a placeat,
-        commodi ratione recusandae quibusdam accusamus molestias reiciendis
-        corporis. Obcaecati soluta optio sapiente facilis tenetur iusto possimus
-        doloremque eius dolorum. Quasi recusandae autem dolorum consequatur
-        explicabo eligendi facere architecto molestiae, libero cumque
-        accusantium, impedit voluptas odio vitae soluta cum commodi sequi? Quis
-        nihil eius optio dicta, error repellat. Alias numquam tempore vero
-        molestias dicta tenetur facere! Et iste accusantium quisquam, non dicta
-        distinctio quasi possimus temporibus aut iure voluptatibus expedita a
-        porro voluptatum ex quibusdam! Veritatis, sit dignissimos deleniti
-        quaerat sunt id quidem itaque, tempore fugit veniam odio sapiente illum
-        eaque at vero eius distinctio non! Quia, alias? Voluptates, ipsam
-        tempora, doloremque illum iure obcaecati ipsa saepe perferendis
-        recusandae dolorum quaerat vitae quod? Aspernatur, officiis. Unde
-        accusamus magni provident voluptatem. Delectus rerum, repellat,
-        veritatis repudiandae blanditiis eaque repellendus cum quidem autem,
-        eligendi iure. Nostrum nam, modi aliquid natus vitae, provident impedit
-        autem quo fugit sed reiciendis sapiente rerum necessitatibus officia,
-        aut accusamus inventore dolor quos dolorem eum aliquam ad placeat ea.
-        Natus unde aperiam illum assumenda cumque, magni pariatur quasi vel
-        necessitatibus, sapiente molestiae, quam error? Minus, corrupti ex!
-        Aperiam, accusamus expedita ea reprehenderit impedit voluptas libero cum
-        officiis adipisci esse veritatis inventore deleniti dolore architecto
-        laboriosam nihil ipsam. Tempora doloremque cum quos architecto alias
-        repudiandae consequuntur labore unde autem explicabo. Ad aspernatur
-        aliquid labore repellendus dolores cumque illum voluptate perferendis ab
-        nisi. Similique illum beatae doloribus, delectus iure nam quas! Sit
-        cupiditate qui, delectus quidem ab numquam excepturi ex id maxime
-        architecto autem. A magnam iste animi aspernatur rem eum maxime
-        reiciendis ducimus fugit, corporis unde dolorum neque amet molestias
-        beatae architecto aliquam libero, praesentium quibusdam. Suscipit nobis
-        dolore aliquam veritatis neque asperiores animi quod facilis explicabo
-        doloremque. Debitis repellendus dolores assumenda perspiciatis,
-        dignissimos corrupti optio cupiditate, laudantium doloremque minus
-        error.
-      </p>
+  <section *ngIf="card">
+    <div class="notesContainer">
+      <h2>NOTES AND RULES INFORMATION FOR <span>{{ card.name | uppercase }}</span> :</h2>
+
+      <div>
+        <p>{{card.rulings[0].text}}</p>
+        <span class="notesContainer__date">({{card.rulings[0].date}})</span>
+      </div>
+
     </div>
   </section>
 </div>
