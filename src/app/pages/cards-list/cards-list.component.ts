@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class CardsListComponent implements OnInit, OnDestroy {
   public suscripciones: Subscription[] = [];
+  public currentPage = 1;
 
   constructor(private cardsService: CardsService) {}
 
@@ -23,7 +24,8 @@ export class CardsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getAllCards();
+
+    this.getAllCards(this.currentPage);
   }
 
   ngOnDestroy(): void {
@@ -33,10 +35,12 @@ export class CardsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getAllCards(): void {
-    let peticionAllCards = this.cardsService.getAllCards().subscribe({
+  public getAllCards(value:number): void {
+    let peticionAllCards = this.cardsService.getAllCards(value).subscribe({
       next: (res) => {
         this.cardsService.cards = res.cards;
+        console.log(res);
+
       },
       error: (err) => {
         alert('ocurrió un error en la petición getAllCards');
@@ -44,5 +48,9 @@ export class CardsListComponent implements OnInit, OnDestroy {
     });
 
     this.suscripciones.push(peticionAllCards);
+  }
+
+  public getValuePage(value:number): number{
+    return this.currentPage = value;
   }
 }

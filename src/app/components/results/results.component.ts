@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-results',
@@ -8,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './results.component.scss'
 })
 export class ResultsComponent {
+
+  @Input() public infoPages!:number;
+
+
+
+
+
+
 
 }

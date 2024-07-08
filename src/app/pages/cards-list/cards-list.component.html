@@ -1,6 +1,16 @@
 <ng-container *ngIf="cartasServicio.length > 0; else loadingCards">
-  <app-filter></app-filter>
-  <app-results></app-results>
+  <app-filter
+  [currentPage]="currentPage"
+  (emisionCurrentPage)="getValuePage($event)"
+  ></app-filter>
+  <section class="resultsContainer">
+    <div>
+      <p>
+        <span>{{ currentPage }} - 937 pages</span>
+        where the colors is W and (the card is available on Paper)
+      </p>
+    </div>
+  </section>
 
   <section>
     <div class="cardsContainer">
@@ -19,6 +29,4 @@
       <h1>Loading Card...</h1>
     </div>
   </section>
-
-
 </ng-template>

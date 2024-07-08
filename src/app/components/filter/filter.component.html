@@ -30,10 +30,10 @@
       </select>
     </div>
     <div class="filterContainer_pagination">
-      <button>|<<</button>
-      <button>< Previous</button>
-      <button>Next 60 ></button>
-      <button>>>|</button>
+      <button (click)="firstPage()">|<<</button>
+      <button (click)="previousPage()">< Previous</button>
+      <button (click)="nextPage()">Next 60 ></button>
+      <button (click)="lastPage()">>>|</button>
     </div>
   </div>
 </section>
