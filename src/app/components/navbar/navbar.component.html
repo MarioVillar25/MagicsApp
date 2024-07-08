@@ -15,7 +15,12 @@
         width="15px"
         alt=""
       />
-      <input type="text" placeholder="Search for Magic cards..." />
+      <input
+        type="text"
+        [formControl]="searchInput"
+        placeholder="Search for Magic cards..."
+        (keyup.enter)="searchCard()"
+      />
     </div>
 
     <div class="navContainer_colores">
