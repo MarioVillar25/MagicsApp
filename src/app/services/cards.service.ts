@@ -18,8 +18,7 @@ export class CardsService {
   //* FUNCIONES PARA LLAMADAS A LA API
 
   public getAllCards(page: number): Observable<Cards> {
-    console.log(`${this.baseUrl}?page=${page}`);
-    console.log("DFSAFASOHFASF");
+    //console.log(`${this.baseUrl}?page=${page}`);
 
     return this.http.get<Cards>(`${this.baseUrl}?page=${page}`);
   }

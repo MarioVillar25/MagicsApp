@@ -24,7 +24,6 @@ export class CardsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.getAllCards(this.currentPage);
   }
 
@@ -35,12 +34,11 @@ export class CardsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getAllCards(value:number): void {
+  public getAllCards(value: number): void {
     let peticionAllCards = this.cardsService.getAllCards(value).subscribe({
       next: (res) => {
         this.cardsService.cards = res.cards;
-        console.log(res);
-
+        //console.log(res);
       },
       error: (err) => {
         alert('ocurrió un error en la petición getAllCards');
@@ -50,7 +48,7 @@ export class CardsListComponent implements OnInit, OnDestroy {
     this.suscripciones.push(peticionAllCards);
   }
 
-  public getValuePage(value:number): number{
-    return this.currentPage = value;
+  public getValuePage(value: number): number {
+    return (this.currentPage = value);
   }
 }
