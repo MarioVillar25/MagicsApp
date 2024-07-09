@@ -17,9 +17,9 @@
       />
       <input
         type="text"
-        [formControl]="searchInput"
+        [(ngModel)]="searchInput"
         placeholder="Search for Magic cards..."
-        (keyup.enter)="searchCard()"
+        (keyup)="onKeyPress()"
       />
     </div>
 

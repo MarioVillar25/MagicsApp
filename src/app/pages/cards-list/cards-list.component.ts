@@ -13,18 +13,25 @@ import { Subscription } from 'rxjs';
   styleUrl: './cards-list.component.scss',
 })
 export class CardsListComponent implements OnInit, OnDestroy {
-  public suscripciones: Subscription[] = [];
-  //public currentPage: number = this.cardsService.currentPage;
+  //* VARIABLES:
+
+  private suscripciones: Subscription[] = [];
+
+  //* CONSTRUCTOR:
 
   constructor(private cardsService: CardsService) {}
 
-  get currentPage() {
+  //* GETTERS:
+
+  public get currentPage() {
     return this.cardsService.currentPage;
   }
 
-  get cartasServicio() {
+  public get cartasServicio() {
     return this.cardsService.cards;
   }
+
+  //* FUNCIONES:
 
   public ngOnInit(): void {
     this.getAllCards(this.cardsService.currentPage);
