@@ -24,7 +24,7 @@ export class NavbarComponent implements OnDestroy {
     });
   }
 
-  public searchCard() {
+  public searchCard():void {
     const newTag: string = this.searchInput.value || '';
 
     //Por cada suscripción hacemos manejo de errores con error,
@@ -34,7 +34,6 @@ export class NavbarComponent implements OnDestroy {
       .getCardByQuery(newTag)
       .subscribe({
         next: (res) => {
-          console.log('carta', res);
           this.cardsService.cards = res.cards;
         },
         error: (err) => {

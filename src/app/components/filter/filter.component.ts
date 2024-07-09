@@ -16,16 +16,15 @@ import { Subscription } from 'rxjs';
   styleUrl: './filter.component.scss',
 })
 export class FilterComponent implements OnDestroy {
-  @Input() public currentPage!: number;
-  @Output() public emisionCurrentPage = new EventEmitter<number>();
-
   public suscripciones: Subscription[] = [];
 
   constructor(private cardsService: CardsService) {}
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.unsubscribePetition();
   }
+
+  //Funciones para cambiar de páginas:
 
   public nextPage(): void {
     //hacemos comprobación si existen subscripciones
@@ -37,53 +36,56 @@ export class FilterComponent implements OnDestroy {
 
     //validamos para que el usuario no supere el límite de última página
 
-    if (this.currentPage >= 937) {
+    if (this.cardsService.currentPage >= 937) {
       valor = 937;
     } else {
-      valor = this.currentPage + 1;
+      this.cardsService.currentPage++;
+      valor = this.cardsService.currentPage;
+      console.log('valor', valor);
+      this.callToAllCards(valor);
     }
-
-    this.callToAllCards(valor);
   }
 
   public previousPage(): void {
-    let valor;
-
     //hacemos comprobación si existen subscripciones
 
     if (this.suscripciones.length > 0) {
       this.unsubscribePetition();
     }
 
-    if (this.currentPage <= 1) {
+    let valor;
+
+    if (this.cardsService.currentPage <= 1) {
       valor = 1;
     } else {
-      valor = this.currentPage - 1;
+      this.cardsService.currentPage--;
+      valor = this.cardsService.currentPage;
+      this.callToAllCards(valor);
     }
-
-    this.callToAllCards(valor);
   }
 
   public firstPage(): void {
-    this.currentPage = 1;
-
     //hacemos comprobación si existen subscripciones
     if (this.suscripciones.length !== 0) {
       this.unsubscribePetition();
     }
 
-    this.callToAllCards(this.currentPage);
+    if (this.cardsService.currentPage !== 1) {
+      this.cardsService.currentPage = 1;
+      this.callToAllCards(this.cardsService.currentPage);
+    }
   }
 
   public lastPage(): void {
-    this.currentPage = 937;
-
     //hacemos comprobación si existen subscripciones
     if (this.suscripciones.length !== 0) {
       this.unsubscribePetition();
     }
 
-    this.callToAllCards(this.currentPage);
+    if (this.cardsService.currentPage !== 937) {
+      this.cardsService.currentPage = 937;
+      this.callToAllCards(this.cardsService.currentPage);
+    }
   }
 
   //Función para desuscribirse de todo el array de suscripciones
@@ -102,7 +104,6 @@ export class FilterComponent implements OnDestroy {
     let peticionAllCards = this.cardsService.getAllCards(value).subscribe({
       next: (res) => {
         this.cardsService.cards = res.cards;
-        this.emisionCurrentPage.emit(value);
       },
       error: (err) => {
         alert('ocurrió un error en la petición getAllCards');
@@ -116,4 +117,19 @@ export class FilterComponent implements OnDestroy {
 
     return peticionAllCards;
   }
+
+
+  public sortDesc():void{
+
+    this.cardsService.cards.sort();
+
+    this.cardsService.cards.reverse();
+
+
+  }
+
+
+
+
+
 }

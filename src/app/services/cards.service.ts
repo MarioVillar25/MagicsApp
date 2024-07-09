@@ -12,13 +12,13 @@ export class CardsService {
   public baseUrl: string = environments.BASE_URL;
 
   public cards: Card[] = [];
+  public currentPage: number = 1;
 
   constructor(private http: HttpClient) {}
 
   //* FUNCIONES PARA LLAMADAS A LA API
 
   public getAllCards(page: number): Observable<Cards> {
-    //console.log(`${this.baseUrl}?page=${page}`);
 
     return this.http.get<Cards>(`${this.baseUrl}?page=${page}`);
   }
@@ -32,6 +32,4 @@ export class CardsService {
   public getCardByQuery(query: string): Observable<Cards> {
     return this.http.get<Cards>(`${this.baseUrl}?name=${query}`);
   }
-
-
 }
