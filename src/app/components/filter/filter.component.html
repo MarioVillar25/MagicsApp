@@ -22,9 +22,9 @@
         <option value="">Blue</option>
       </select>
       <p><strong>:</strong></p>
-      <select name="Desc">
-        <option value="">ASC</option>
-        <option value="" (click)="sortDesc()">DESC</option>
+      <select [(ngModel)]="orderBy" (change)="handleSelect($event)">
+        <option value="ASC">ASC</option>
+        <option value="DESC">DESC</option>
       </select>
     </div>
     <div class="filterContainer_pagination">

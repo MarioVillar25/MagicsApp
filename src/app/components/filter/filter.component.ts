@@ -3,22 +3,38 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
+  OnInit,
   Output,
 } from '@angular/core';
 import { CardsService } from '../../services/cards.service';
 import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { Card } from '../../interfaces/cards.interface';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss',
 })
-export class FilterComponent implements OnDestroy {
+export class FilterComponent implements OnInit, OnDestroy {
+  //* VARIABLES:
+
   public suscripciones: Subscription[] = [];
+  public orderBy: string = 'ASC';
+
+  //* CONSTRUCTOR:
 
   constructor(private cardsService: CardsService) {}
+
+  //* FUNCIONES:
+
+  //Funciones para el ciclo de vida del componente:
+
+  public ngOnInit(): void {
+    this.orderByAsc();
+  }
 
   public ngOnDestroy(): void {
     this.unsubscribePetition();
@@ -41,7 +57,6 @@ export class FilterComponent implements OnDestroy {
     } else {
       this.cardsService.currentPage++;
       valor = this.cardsService.currentPage;
-      console.log('valor', valor);
       this.callToAllCards(valor);
     }
   }
@@ -104,6 +119,7 @@ export class FilterComponent implements OnDestroy {
     let peticionAllCards = this.cardsService.getAllCards(value).subscribe({
       next: (res) => {
         this.cardsService.cards = res.cards;
+        this.orderByAsc();
       },
       error: (err) => {
         alert('ocurrió un error en la petición getAllCards');
@@ -118,18 +134,53 @@ export class FilterComponent implements OnDestroy {
     return peticionAllCards;
   }
 
+  //Función para establecer orden DESCENDENTE de cards;
 
-  public sortDesc():void{
+  public orderByDesc() {
+    this.cardsService.cards.sort((a: Card, b: Card) => {
+      let num = 0;
 
-    this.cardsService.cards.sort();
+      if (a.name < b.name) {
+        num = 1;
+      }
+      if (a.name > b.name) {
+        num = -1;
+      }
 
-    this.cardsService.cards.reverse();
-
-
+      return num;
+    });
   }
 
+  //Función para establecer orden ASCENDENTE de cards;
 
+  public orderByAsc() {
+    this.cardsService.cards.sort((a: Card, b: Card) => {
+      let num = 0;
 
+      if (a.name < b.name) {
+        num = -1;
+      }
+      if (a.name > b.name) {
+        num = 1;
+      }
 
+      return num;
+    });
+  }
 
+  //Función para intercalar orden ASC/DESC de cards;
+
+  public handleSelect(event: Event) {
+    let selectedValue = (event.target as HTMLSelectElement).value;
+
+    switch (selectedValue) {
+      case 'ASC':
+        this.orderByAsc();
+        break;
+
+      case 'DESC':
+        this.orderByDesc();
+        break;
+    }
+  }
 }
