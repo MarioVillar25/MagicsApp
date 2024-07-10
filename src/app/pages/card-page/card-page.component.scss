@@ -25,6 +25,38 @@ section {
 
     .cardContainer_cardInfo--imgCardContainer {
       display: flex;
+      flex-direction: column;
+      > div {
+        .boton {
+          width: 20%;
+          display: flex;
+          justify-content: flex-start;
+          gap: 5px;
+          cursor: pointer;
+          gap: 8px;
+          border: 1px solid var(--dark-blue);
+          padding: 6px 10px;
+          border-radius: 4px;
+
+          img {
+            width: 20px;
+          }
+
+          p {
+            margin: 0;
+          }
+        }
+
+        .boton:hover {
+          img {
+            filter: invert(1);
+          }
+          p {
+            color: white;
+          }
+          background-color: var(--dark-blue);
+        }
+      }
     }
 
     display: flex;

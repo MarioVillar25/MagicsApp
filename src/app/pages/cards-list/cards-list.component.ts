@@ -23,6 +23,16 @@ export class CardsListComponent implements OnInit, OnDestroy {
 
   constructor(private cardsService: CardsService) {}
 
+  //* LIFE CYCLE HOOKS:
+
+  public ngOnInit(): void {
+    this.getAllCards(this.cardsService.currentPage);
+  }
+
+  public ngOnDestroy(): void {
+    unsubscribePetition(this.suscripciones);
+  }
+
   //* GETTERS:
 
   public get currentPage() {
@@ -34,14 +44,6 @@ export class CardsListComponent implements OnInit, OnDestroy {
   }
 
   //* FUNCIONES:
-
-  public ngOnInit(): void {
-    this.getAllCards(this.cardsService.currentPage);
-  }
-
-  public ngOnDestroy(): void {
-    unsubscribePetition(this.suscripciones);
-  }
 
   public getAllCards(value: number): void {
     let peticionAllCards = this.cardsService.getAllCards(value).subscribe({

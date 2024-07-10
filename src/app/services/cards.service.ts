@@ -13,6 +13,7 @@ export class CardsService {
 
   public cards: Card[] = [];
   public currentPage: number = 1;
+  public searchInput: string = "";
 
   constructor(private http: HttpClient) {}
 

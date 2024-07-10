@@ -7,9 +7,15 @@ import {
   Output,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationStart,
+  Route,
+  Router,
+  RouterLink,
+} from '@angular/router';
 import { CardsService } from '../../services/cards.service';
-import { debounceTime, Subject, Subscription } from 'rxjs';
+import { debounceTime, filter, Subject, Subscription, tap } from 'rxjs';
 import { orderByAsc, unsubscribePetition } from '../../utils/utils';
 
 @Component({
@@ -22,7 +28,7 @@ import { orderByAsc, unsubscribePetition } from '../../utils/utils';
 export class NavbarComponent implements OnInit, OnDestroy {
   //* VARIABLES:
 
-  public searchInput = '';
+  public searchInputText = '';
   public searchSubject: Subject<string> = new Subject<string>();
   public suscripciones: Subscription[] = [];
   private debouncerSuscription?: Subscription;
@@ -31,12 +37,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   //* CONSTRUCTOR:
 
-  constructor(private cardsService: CardsService) {}
+  constructor(private cardsService: CardsService, private router: Router) {}
 
   //* FUNCIONES:
 
   public ngOnInit(): void {
     this.toEmitDebounceSuscription();
+
+
+    //Función para que cada vez que cambia la ruta se haga una movida
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationStart))
+      .subscribe(() => {
+        this.searchInputText = '';
+      });
+
+
   }
 
   public ngOnDestroy(): void {
@@ -47,7 +63,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public onKeyPress() {
     //el subject emite un valor. En este caso el valor del input
-    this.searchSubject.next(this.searchInput);
+    this.searchSubject.next(this.searchInputText);
   }
 
   //Función para hacer la búsqueda Debounce y emitir el valor del input
@@ -82,6 +98,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   //Función para resetear la paginación
+
+  //? Mala UX?
 
   public resetPagination() {
     this.cardsService.currentPage = 1;
