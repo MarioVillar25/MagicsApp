@@ -1,15 +1,13 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CardsService } from '../../services/cards.service';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { Card } from '../../interfaces/cards.interface';
+import {
+  orderByAsc,
+  orderByDesc,
+  unsubscribePetition,
+} from '../../utils/utils';
 
 @Component({
   selector: 'app-filter',
@@ -33,11 +31,11 @@ export class FilterComponent implements OnInit, OnDestroy {
   //Funciones para el ciclo de vida del componente:
 
   public ngOnInit(): void {
-    this.orderByAsc();
+    orderByAsc(this.cardsService.cards);
   }
 
   public ngOnDestroy(): void {
-    this.unsubscribePetition();
+    unsubscribePetition(this.suscripciones);
   }
 
   //Funciones para cambiar de páginas:
@@ -45,7 +43,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   public nextPage(): void {
     //hacemos comprobación si existen subscripciones
     if (this.suscripciones.length > 0) {
-      this.unsubscribePetition();
+      unsubscribePetition(this.suscripciones);
     }
 
     let valor;
@@ -65,7 +63,7 @@ export class FilterComponent implements OnInit, OnDestroy {
     //hacemos comprobación si existen subscripciones
 
     if (this.suscripciones.length > 0) {
-      this.unsubscribePetition();
+      unsubscribePetition(this.suscripciones);
     }
 
     let valor;
@@ -82,7 +80,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   public firstPage(): void {
     //hacemos comprobación si existen subscripciones
     if (this.suscripciones.length !== 0) {
-      this.unsubscribePetition();
+      unsubscribePetition(this.suscripciones);
     }
 
     if (this.cardsService.currentPage !== 1) {
@@ -94,7 +92,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   public lastPage(): void {
     //hacemos comprobación si existen subscripciones
     if (this.suscripciones.length !== 0) {
-      this.unsubscribePetition();
+      unsubscribePetition(this.suscripciones);
     }
 
     if (this.cardsService.currentPage !== 937) {
@@ -105,25 +103,17 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   //Función para desuscribirse de todo el array de suscripciones
 
-  public unsubscribePetition(): void {
-    this.suscripciones.forEach((item) => {
-      item.unsubscribe();
-    });
-
-    this.suscripciones = [];
-  }
-
   //Función para encapsular la petición a AllCards
 
   public callToAllCards(value: number): Subscription {
     let peticionAllCards = this.cardsService.getAllCards(value).subscribe({
       next: (res) => {
         this.cardsService.cards = res.cards;
-        this.orderByAsc();
+        this.toGetOrderPersistence();
       },
       error: (err) => {
         alert('ocurrió un error en la petición getAllCards');
-        this.unsubscribePetition();
+        unsubscribePetition(this.suscripciones);
       },
     });
 
@@ -134,52 +124,36 @@ export class FilterComponent implements OnInit, OnDestroy {
     return peticionAllCards;
   }
 
-  //Función para establecer orden DESCENDENTE de cards;
+  //Función para mantener la persistencia del orden ASC/DESC;
 
-  public orderByDesc() {
-    this.cardsService.cards.sort((a: Card, b: Card) => {
-      let num = 0;
+  public toGetOrderPersistence() {
+    if (this.orderBy === 'ASC') {
+      orderByAsc(this.cardsService.cards);
+    }
 
-      if (a.name < b.name) {
-        num = 1;
-      }
-      if (a.name > b.name) {
-        num = -1;
-      }
-
-      return num;
-    });
-  }
-
-  //Función para establecer orden ASCENDENTE de cards;
-
-  public orderByAsc() {
-    this.cardsService.cards.sort((a: Card, b: Card) => {
-      let num = 0;
-
-      if (a.name < b.name) {
-        num = -1;
-      }
-      if (a.name > b.name) {
-        num = 1;
-      }
-
-      return num;
-    });
+    if (this.orderBy === 'DESC') {
+      orderByDesc(this.cardsService.cards);
+    }
   }
 
   //Función para intercalar orden ASC/DESC de cards;
 
-  public handleSelect(event: Event) {
+  public handleSelect(event: Event): void {
     let selectedValue = (event.target as HTMLSelectElement).value;
 
     switch (selectedValue) {
       case 'ASC':
-        this.orderByAsc();
+        orderByAsc(this.cardsService.cards);
+
+        this.orderBy = 'ASC';
+
         break;
 
       case 'DESC':
-        this.orderByDesc();
+        orderByDesc(this.cardsService.cards);
+
+        this.orderBy = 'DESC';
+
         break;
     }
   }

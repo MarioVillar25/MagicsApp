@@ -4,6 +4,8 @@ import { CardComponent } from '../../components/card/card.component';
 import { CardsService } from '../../services/cards.service';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { Card } from '../../interfaces/cards.interface';
+import { orderByAsc, unsubscribePetition } from '../../utils/utils';
 
 @Component({
   selector: 'app-cards-list',
@@ -38,16 +40,14 @@ export class CardsListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    //nos desuscribimos del las suscripciones de getAllCards
-    this.suscripciones.forEach((item) => {
-      item.unsubscribe;
-    });
+    unsubscribePetition(this.suscripciones);
   }
 
   public getAllCards(value: number): void {
     let peticionAllCards = this.cardsService.getAllCards(value).subscribe({
       next: (res) => {
         this.cardsService.cards = res.cards;
+        orderByAsc(this.cardsService.cards);
       },
       error: (err) => {
         alert('ocurrió un error en la petición getAllCards');
