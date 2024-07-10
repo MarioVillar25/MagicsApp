@@ -7,13 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  ActivatedRoute,
-  NavigationStart,
-  Route,
-  Router,
-  RouterLink,
-} from '@angular/router';
+import { NavigationStart, Router, RouterLink } from '@angular/router';
 import { CardsService } from '../../services/cards.service';
 import { debounceTime, filter, Subject, Subscription, tap } from 'rxjs';
 import { orderByAsc, unsubscribePetition } from '../../utils/utils';
@@ -31,7 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public searchInputText = '';
   public searchSubject: Subject<string> = new Subject<string>();
   public suscripciones: Subscription[] = [];
-  private debouncerSuscription?: Subscription;
+  //private debouncerSuscription?: Subscription;
 
   @Output() public onDebounce = new EventEmitter<string>();
 
@@ -39,24 +33,42 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(private cardsService: CardsService, private router: Router) {}
 
-  //* FUNCIONES:
+  //* LIFECYCLE HOOKS
 
   public ngOnInit(): void {
     this.toEmitDebounceSuscription();
+    this.resetSearchInputText();
+    this.subscribeToInputText();
+  }
 
+  public ngOnDestroy(): void {
+    //this.debouncerSuscription?.unsubscribe();
+    unsubscribePetition(this.suscripciones);
+  }
 
-    //Función para que cada vez que cambia la ruta se haga una movida
-    this.router.events
+  //* FUNCIONES:
+
+  //Función para subscribirse al BehaviorSubject para el InputTextValue
+
+  public subscribeToInputText(): void {
+    let suscripcionSubject = this.cardsService.inputTextProtected.subscribe(
+      (res) => {
+        this.searchInputText = res;
+      }
+    );
+
+    this.suscripciones.push(suscripcionSubject);
+  }
+
+  //Función para que cada vez que cambia la ruta se resetea el valor del input
+
+  public resetSearchInputText() {
+    let suscripcionURL = this.router.events
       .pipe(filter((event) => event instanceof NavigationStart))
       .subscribe(() => {
         this.searchInputText = '';
       });
-
-
-  }
-
-  public ngOnDestroy(): void {
-    this.debouncerSuscription?.unsubscribe();
+    this.suscripciones.push(suscripcionURL);
   }
 
   //Función para mandar el valor del input a la función debounce
@@ -69,11 +81,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
   //Función para hacer la búsqueda Debounce y emitir el valor del input
 
   public toEmitDebounceSuscription(): void {
-    this.debouncerSuscription = this.searchSubject
+    let debouncerSuscription = this.searchSubject
       .pipe(debounceTime(300))
       .subscribe((res) => {
         this.onDebounce.emit(res);
       });
+
+      this.suscripciones.push(debouncerSuscription);
+
   }
 
   //Función para encapsular la petición a AllCards
@@ -98,8 +113,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   //Función para resetear la paginación
-
-  //? Mala UX?
 
   public resetPagination() {
     this.cardsService.currentPage = 1;

@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CardsService } from '../../services/cards.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { Card } from '../../interfaces/cards.interface';
 import {
   orderByAsc,
   orderByDesc,
@@ -26,9 +25,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   constructor(private cardsService: CardsService) {}
 
-  //* FUNCIONES:
-
-  //Funciones para el ciclo de vida del componente:
+  //* LIFECYCLE HOOKS
 
   public ngOnInit(): void {
     orderByAsc(this.cardsService.cards);
@@ -36,6 +33,14 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     unsubscribePetition(this.suscripciones);
+  }
+
+  //* FUNCIONES:
+
+  //Funcion para cambiar el valor que va a emitir el BehaviorSubject
+
+  public updateInputText(value: string) {
+    this.cardsService.changeInputValue(value);
   }
 
   //Funciones para cambiar de páginas:
@@ -101,7 +106,6 @@ export class FilterComponent implements OnInit, OnDestroy {
     }
   }
 
-  //Función para desuscribirse de todo el array de suscripciones
 
   //Función para encapsular la petición a AllCards
 
@@ -110,6 +114,7 @@ export class FilterComponent implements OnInit, OnDestroy {
       next: (res) => {
         this.cardsService.cards = res.cards;
         this.toGetOrderPersistence();
+        this.updateInputText('');
       },
       error: (err) => {
         alert('ocurrió un error en la petición getAllCards');
