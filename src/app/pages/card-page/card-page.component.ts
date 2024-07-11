@@ -13,32 +13,53 @@ import { CommonModule } from '@angular/common';
   styleUrl: './card-page.component.scss',
 })
 export class CardPageComponent implements OnInit, OnDestroy {
-  @Input() public card: CardClass | undefined;
+  //* VARIABLES:
 
   public suscripciones: Subscription[] = [];
+  public localLanguage: string = 'English';
 
+  @Input() public card?: CardClass;
+
+  public cardInfo = {
+    name: '',
+    type: '',
+    description: '',
+    language: '',
+  };
+  //* CONSTRUCTOR:
 
   constructor(
     private cardsService: CardsService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
+  //* LIFECYCLE HOOKS
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getCardById();
   }
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.suscripciones.forEach((item) => {
       item.unsubscribe;
     });
   }
 
-  getCardById() {
+  //* FUNCIONES:
+
+  //Función para conseguir carta por ID
+
+  public getCardById() {
     let peticionCardById = this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.cardsService.getCardById(id)))
       .subscribe({
         next: (res) => {
           if (!res) return this.router.navigate(['']);
+          this.cardInfo = {
+            name: res.card.name,
+            type: res.card.type,
+            description: res.card.text,
+            language: 'English',
+          };
           return (this.card = res.card);
         },
         error: (err) => {
@@ -46,6 +67,58 @@ export class CardPageComponent implements OnInit, OnDestroy {
         },
       });
 
-      this.suscripciones.push(peticionCardById);
+    this.suscripciones.push(peticionCardById);
+  }
+
+  //Función para cambiar Idioma
+
+  public changeLanguage(language: string) {
+    switch (language) {
+      case this.card?.foreignNames[0].language:
+        this.changeCardLanguage(0);
+
+        break;
+      case this.card?.foreignNames[1].language:
+        this.changeCardLanguage(1);
+
+        break;
+      case this.card?.foreignNames[2].language:
+        this.changeCardLanguage(2);
+
+        break;
+      case this.card?.foreignNames[3].language:
+        this.changeCardLanguage(3);
+
+        break;
+      case this.card?.foreignNames[4].language:
+        this.changeCardLanguage(4);
+
+        break;
+
+      case this.card?.foreignNames[5].language:
+        this.changeCardLanguage(5);
+
+        break;
+      case this.card?.foreignNames[6].language:
+        this.changeCardLanguage(6);
+
+        break;
+
+      case this.card?.foreignNames[7].language:
+        this.changeCardLanguage(7);
+
+        break;
     }
+  }
+
+  //Función para cambiar el idioma de la carta
+
+  public changeCardLanguage(value: number): void {
+    this.cardInfo = {
+      name: this.card!.foreignNames[value].name,
+      type: this.card!.foreignNames[value].type,
+      description: this.card!.foreignNames[value].text,
+      language: this.card!.foreignNames[value].language,
+    };
+  }
 }

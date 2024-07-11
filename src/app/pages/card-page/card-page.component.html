@@ -37,23 +37,16 @@
                   <h2>{{ card.setName }} ({{ card.set }})</h2>
                   <span
                     >#{{ card.number }} {{ card.rarity }} -
-                    {{ card.foreignNames[0].language }} - {{ card.layout }}
+                    {{ cardInfo.language }} - {{ card.layout }}
                   </span>
                 </div>
               </div>
               <div class="cardContainer_cardInfo--languages--buttonLanguages">
-                <button>EN</button>
-                <button>ES</button>
-                <button>FR</button>
-                <button>UC</button>
-                <button>KO</button>
-                <button>AF</button>
-                <button>AF</button>
-                <button>AF</button>
-                <button>AF</button>
-                <button>AF</button>
-                <button>AF</button>
-                <button>:</button>
+                <ng-container *ngFor="let language of card.foreignNames">
+                  <button (click)="changeLanguage(language.language)">
+                    {{ language.language }}
+                  </button>
+                </ng-container>
               </div>
               <div class="cardContainer_cardInfo--languages--prints">
                 <p>PRINTS</p>
@@ -76,16 +69,16 @@
             <div class="cardContainer_cardInfo--descriptions">
               <div>
                 <div>
-                  <h4>{{ card.name }}</h4>
+                  <h4>{{ cardInfo.name  }}</h4>
                 </div>
               </div>
               <hr />
               <div>
-                <p>{{ card.type }}</p>
+                <p>{{ cardInfo.type }}</p>
               </div>
               <hr />
               <div>
-                <p>{{ card.text }}</p>
+                <p>{{ cardInfo.description }}</p>
               </div>
               <hr />
               <div>

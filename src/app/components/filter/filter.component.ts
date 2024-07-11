@@ -169,16 +169,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   //Función para mantener la persistencia de Rarity Order;
 
   public toGetRarityOrderPersistence(): void {
-
     this.orderRarity = 'Normal';
-
-
-
-
-
-
-
-
   }
 
   //Función para intercalar orden ASC/DESC de cards;
