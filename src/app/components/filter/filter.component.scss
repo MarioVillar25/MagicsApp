@@ -55,6 +55,10 @@ select:hover {
     display: flex;
     align-items: center;
     gap: 5px;
+
+    select{
+      width: 7rem;
+    }
   }
 
   .filterContainer_pagination {

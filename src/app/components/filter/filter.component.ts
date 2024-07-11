@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { CardsService } from '../../services/cards.service';
-import { Subject, Subscription } from 'rxjs';
+import { filter, Subject, Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import {
   orderByAsc,
@@ -28,10 +28,8 @@ export class FilterComponent implements OnInit, OnDestroy {
   public suscripciones: Subscription[] = [];
   public orderBy: string = 'ASC';
   public rarity: string = '';
+  public orderRarity: string = '';
   public cardsBackUp: Card[] = this.cardsService.cards;
-  public rarities = ['Common', 'Uncommon', 'Rare', 'Mythic', 'Special'];
-
-  @Output() emisionBoolean = new EventEmitter<boolean>();
 
   //* CONSTRUCTOR:
 
@@ -48,33 +46,6 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   //* FUNCIONES:
-
-  //Función para cambiar Rareza Básica
-
-  public changeRarity(event: Event) {
-    let selectedValue = (event.target as HTMLSelectElement).value;
-
-    if (this.cardsService.cards.length < 100) {
-      this.cardsService.cards = this.cardsBackUp;
-    }
-
-    let datos = this.cardsService.cards.filter(
-      (elem) => elem.rarity === selectedValue
-    );
-
-    this.cardsService.cards = datos;
-
-    if (this.cardsService.cards.length === 0) {
-      this.cardsService.cards = this.cardsBackUp;
-      (event.target as HTMLSelectElement).value = 'Common';
-      this.rarity = 'Common';
-
-      alert(
-        `No existen cartas en esta página con el filtro: "${selectedValue}" `
-      );
-    }
-    this.rarity = selectedValue;
-  }
 
   //Funcion para cambiar el valor que va a emitir el BehaviorSubject
 
@@ -153,8 +124,9 @@ export class FilterComponent implements OnInit, OnDestroy {
         this.cardsService.cards = res.cards;
         this.cardsBackUp = res.cards;
         this.toGetOrderPersistence();
-        this.updateInputText('');
         this.toGetRarityPersistence();
+        this.toGetRarityOrderPersistence();
+        this.updateInputText('');
       },
       error: (err) => {
         alert('ocurrió un error en la petición getAllCards');
@@ -184,17 +156,29 @@ export class FilterComponent implements OnInit, OnDestroy {
   //Función para mantener la persistencia de Rarity;
 
   public toGetRarityPersistence(): void {
+    let datos: Card[] = [];
 
-    let datos = this.cardsService.cards.filter(
-      (elem) => elem.rarity === this.rarity
-    );
-
-    this.cardsService.cards = datos;
+    this.filterByRarity(datos, this.rarity);
 
     if (this.cardsService.cards.length === 0) {
       this.cardsService.cards = this.cardsBackUp;
       this.rarity = 'Common';
     }
+  }
+
+  //Función para mantener la persistencia de Rarity Order;
+
+  public toGetRarityOrderPersistence(): void {
+
+    this.orderRarity = 'Normal';
+
+
+
+
+
+
+
+
   }
 
   //Función para intercalar orden ASC/DESC de cards;
@@ -217,5 +201,97 @@ export class FilterComponent implements OnInit, OnDestroy {
 
         break;
     }
+  }
+
+  //Función para cambiar Rareza Básica
+
+  public changeRarity(event: Event) {
+    let selectedValue = (event.target as HTMLSelectElement).value;
+    let datos: Card[] = [];
+    this.rarity = selectedValue;
+
+    //Este If recarga el array del backUp
+
+    if (this.cardsService.cards.length < 100) {
+      this.cardsService.cards = this.cardsBackUp;
+    }
+
+    switch (selectedValue) {
+      case 'All':
+        this.cardsService.cards = this.cardsBackUp;
+        break;
+
+      case 'Common':
+        this.filterByRarity(datos, 'Common');
+
+        break;
+
+      case 'Uncommon':
+        this.filterByRarity(datos, 'Uncommon');
+
+        break;
+      case 'Rare':
+        this.filterByRarity(datos, 'Rare');
+
+        break;
+      case 'Special':
+        this.filterByRarity(datos, 'Special');
+
+        break;
+      case 'Mythic':
+        this.filterByRarity(datos, 'Mythic');
+
+        break;
+    }
+
+    if (this.cardsService.cards.length === 0) {
+      this.cardsService.cards = this.cardsBackUp;
+      (event.target as HTMLSelectElement).value = '';
+      this.rarity = '';
+      alert(
+        `No existen cartas en esta página con el filtro: "${selectedValue}" `
+      );
+    }
+  }
+
+  //Función para cambiar rareza compleja
+
+  public changeRarityOrder(event: Event) {
+    const rarities = ['Common', 'Uncommon', 'Rare', 'Special', 'Mythic'];
+    let selectedValue = (event.target as HTMLSelectElement).value;
+    let data: Card[] = [];
+    let orderedCards: Card[] = [];
+
+    for (let i = 0; i < rarities.length; i++) {
+      data = this.cardsService.cards.filter((elem) => {
+        if (elem.rarity === rarities[i]) {
+          orderedCards.push(elem);
+        }
+      });
+    }
+
+    switch (selectedValue) {
+      case 'Normal':
+        this.cardsService.cards = this.cardsBackUp;
+
+        break;
+
+      case 'Common to Mythic':
+        this.cardsService.cards = orderedCards;
+
+        break;
+
+      case 'Mythic to Common':
+        this.cardsService.cards = orderedCards.reverse();
+
+        break;
+    }
+  }
+
+  //Función para filtrar array según Rareza
+
+  public filterByRarity(data: Card[], rarity: string): void {
+    data = this.cardsService.cards.filter((elem) => elem.rarity === rarity);
+    this.cardsService.cards = data;
   }
 }

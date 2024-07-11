@@ -1,23 +1,17 @@
 <section>
   <div class="filterContainer">
     <div class="filterContainer_filters">
-      <select name="cards">
-        <option value="" disabled selected>Cards</option>
-        <option value="">Red</option>
-        <option value="">Green</option>
-        <option value="">Blue</option>
+      <p>Cards sorted by</p>
+      <select [(ngModel)]="orderRarity" (change)="changeRarityOrder($event)">
+        <option value="" disabled selected>Rarity Order</option>
+        <option value="Normal">Normal</option>
+        <option value="Common to Mythic">Common to Mythic</option>
+        <option value="Mythic to Common">Mythic to Common</option>
       </select>
-      <p>as</p>
-      <select name="Images">
-        <option value="" disabled selected>Images</option>
-        <option value="">Red</option>
-        <option value="">Green</option>
-        <option value="">Blue</option>
-      </select>
-      <p>sorted by</p>
+      <p><strong>:</strong></p>
       <select [(ngModel)]="rarity" (change)="changeRarity($event)">
-        <option value="">Common to Mythic</option>
-        <option value="">Mythic to Common</option>
+        <option value="" disabled selected>Rarity</option>
+        <option value="All">All</option>
         <option value="Common">Common</option>
         <option value="Uncommon">Uncommon</option>
         <option value="Rare">Rare</option>

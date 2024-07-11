@@ -105,6 +105,9 @@ export enum Rarity {
   Common = "Common",
   Rare = "Rare",
   Uncommon = "Uncommon",
+  Special = "Special",
+  Mythic = "Mythic",
+
 }
 
 export interface Ruling {
