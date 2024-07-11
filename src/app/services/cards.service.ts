@@ -15,11 +15,13 @@ export class CardsService {
   public currentPage: number = 1;
   public inputText: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  //! APUNTE:
+  //! APUNTE IMPORTANTE SOBRE BehaviorSubject & Subject:
 
   //!public inputText: Subject<string> = new Subject<string>();
   //! Con Subject tiene el mismo efecto, solo que no tiene que llevar un valor inicial.
 
+
+  //Nota:
 
   //Encapsulo el BehaviorSubject en una variable por motivos de seguridad y limpieza
   //Esto impedirá que a la hora de suscribirse a currentString no emita valores no deseados el BehaviorSubject
@@ -27,9 +29,14 @@ export class CardsService {
 
   constructor(private http: HttpClient) {}
 
-  //* FUNCIONES PARA LLAMADAS A LA API
+  //* FUNCIONES
+
+  //Funciones para llamadas a la API
 
   public getAllCards(page: number): Observable<Cards> {
+
+
+
     return this.http.get<Cards>(`${this.baseUrl}?page=${page}`);
   }
 
@@ -42,8 +49,6 @@ export class CardsService {
   public getCardByQuery(query: string): Observable<Cards> {
     return this.http.get<Cards>(`${this.baseUrl}?name=${query}`);
   }
-
-  //* OTRAS FUNCIONES
 
   //Función para emitir el valor del BehaviorSubject y cambiar el input del searchBox
 

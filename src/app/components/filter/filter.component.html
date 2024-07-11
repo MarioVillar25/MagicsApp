@@ -15,11 +15,14 @@
         <option value="">Blue</option>
       </select>
       <p>sorted by</p>
-      <select name="Rarity">
-        <option value="" disabled selected>Rarity</option>
-        <option value="">Red</option>
-        <option value="">Green</option>
-        <option value="">Blue</option>
+      <select [(ngModel)]="rarity" (change)="changeRarity($event)">
+        <option value="">Common to Mythic</option>
+        <option value="">Mythic to Common</option>
+        <option value="Common">Common</option>
+        <option value="Uncommon">Uncommon</option>
+        <option value="Rare">Rare</option>
+        <option value="Special">Special</option>
+        <option value="Mythic">Mythic</option>
       </select>
       <p><strong>:</strong></p>
 

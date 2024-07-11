@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CardsService } from '../../services/cards.service';
 import { Subject, Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +13,7 @@ import {
   orderByDesc,
   unsubscribePetition,
 } from '../../utils/utils';
+import { Card, Cards } from '../../interfaces/cards.interface';
 
 @Component({
   selector: 'app-filter',
@@ -20,6 +27,11 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   public suscripciones: Subscription[] = [];
   public orderBy: string = 'ASC';
+  public rarity: string = '';
+  public cardsBackUp: Card[] = this.cardsService.cards;
+  public rarities = ['Common', 'Uncommon', 'Rare', 'Mythic', 'Special'];
+
+  @Output() emisionBoolean = new EventEmitter<boolean>();
 
   //* CONSTRUCTOR:
 
@@ -36,6 +48,33 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   //* FUNCIONES:
+
+  //Función para cambiar Rareza Básica
+
+  public changeRarity(event: Event) {
+    let selectedValue = (event.target as HTMLSelectElement).value;
+
+    if (this.cardsService.cards.length < 100) {
+      this.cardsService.cards = this.cardsBackUp;
+    }
+
+    let datos = this.cardsService.cards.filter(
+      (elem) => elem.rarity === selectedValue
+    );
+
+    this.cardsService.cards = datos;
+
+    if (this.cardsService.cards.length === 0) {
+      this.cardsService.cards = this.cardsBackUp;
+      (event.target as HTMLSelectElement).value = 'Common';
+      this.rarity = 'Common';
+
+      alert(
+        `No existen cartas en esta página con el filtro: "${selectedValue}" `
+      );
+    }
+    this.rarity = selectedValue;
+  }
 
   //Funcion para cambiar el valor que va a emitir el BehaviorSubject
 
@@ -106,15 +145,16 @@ export class FilterComponent implements OnInit, OnDestroy {
     }
   }
 
-
   //Función para encapsular la petición a AllCards
 
   public callToAllCards(value: number): Subscription {
     let peticionAllCards = this.cardsService.getAllCards(value).subscribe({
       next: (res) => {
         this.cardsService.cards = res.cards;
+        this.cardsBackUp = res.cards;
         this.toGetOrderPersistence();
         this.updateInputText('');
+        this.toGetRarityPersistence();
       },
       error: (err) => {
         alert('ocurrió un error en la petición getAllCards');
@@ -138,6 +178,22 @@ export class FilterComponent implements OnInit, OnDestroy {
 
     if (this.orderBy === 'DESC') {
       orderByDesc(this.cardsService.cards);
+    }
+  }
+
+  //Función para mantener la persistencia de Rarity;
+
+  public toGetRarityPersistence(): void {
+
+    let datos = this.cardsService.cards.filter(
+      (elem) => elem.rarity === this.rarity
+    );
+
+    this.cardsService.cards = datos;
+
+    if (this.cardsService.cards.length === 0) {
+      this.cardsService.cards = this.cardsBackUp;
+      this.rarity = 'Common';
     }
   }
 

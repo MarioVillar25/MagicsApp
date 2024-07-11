@@ -4,7 +4,6 @@ import { CardComponent } from '../../components/card/card.component';
 import { CardsService } from '../../services/cards.service';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { Card } from '../../interfaces/cards.interface';
 import { orderByAsc, unsubscribePetition } from '../../utils/utils';
 
 @Component({
@@ -58,4 +57,8 @@ export class CardsListComponent implements OnInit, OnDestroy {
 
     this.suscripciones.push(peticionAllCards);
   }
+
+
+
+
 }
