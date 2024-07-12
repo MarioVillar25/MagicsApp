@@ -14,18 +14,23 @@ export class CardsService {
   public cards: Card[] = [];
   public currentPage: number = 1;
   public inputText: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public backUpNavbar: BehaviorSubject<Card[]> = new BehaviorSubject<Card[]>(
+    this.cards
+  );
+
 
   //! APUNTE IMPORTANTE SOBRE BehaviorSubject & Subject:
 
   //!public inputText: Subject<string> = new Subject<string>();
   //! Con Subject tiene el mismo efecto, solo que no tiene que llevar un valor inicial.
 
-
   //Nota:
 
   //Encapsulo el BehaviorSubject en una variable por motivos de seguridad y limpieza
   //Esto impedirá que a la hora de suscribirse a currentString no emita valores no deseados el BehaviorSubject
   public inputTextProtected = this.inputText.asObservable();
+  public backUpNavbarProtected = this.backUpNavbar.asObservable();
+
 
   constructor(private http: HttpClient) {}
 
@@ -34,9 +39,6 @@ export class CardsService {
   //Funciones para llamadas a la API
 
   public getAllCards(page: number): Observable<Cards> {
-
-
-
     return this.http.get<Cards>(`${this.baseUrl}?page=${page}`);
   }
 
@@ -54,5 +56,11 @@ export class CardsService {
 
   public changeInputValue(value: string) {
     this.inputText.next(value);
+  }
+
+  //Función para emitir el valor del BehaviorSubject y cambiar el array de BackUpNavbar
+
+  public changeBackUpNavbar(value: Card[]) {
+    this.backUpNavbar.next(value);
   }
 }

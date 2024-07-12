@@ -6,14 +6,14 @@ import {
   Output,
 } from '@angular/core';
 import { CardsService } from '../../services/cards.service';
-import { filter, Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import {
   orderByAsc,
   orderByDesc,
   unsubscribePetition,
 } from '../../utils/utils';
-import { Card, Cards } from '../../interfaces/cards.interface';
+import { Card } from '../../interfaces/cards.interface';
 
 @Component({
   selector: 'app-filter',
@@ -39,6 +39,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     orderByAsc(this.cardsService.cards);
+    //console.log("FILTER", this.cardsService.cards );
   }
 
   public ngOnDestroy(): void {
@@ -47,11 +48,17 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   //* FUNCIONES:
 
-  //Funcion para cambiar el valor que va a emitir el BehaviorSubject
+  //Funcion para cambiar el valor que va a emitir el BehaviorSubject del InputText
 
   public updateInputText(value: string) {
     this.cardsService.changeInputValue(value);
   }
+
+    //Funcion para cambiar el valor que va a emitir el BehaviorSubject del backUpNavbar
+
+    public updateBackUpNavbar(value: Card[]) {
+      this.cardsService.changeBackUpNavbar(value);
+    }
 
   //Funciones para cambiar de páginas:
 
@@ -127,6 +134,7 @@ export class FilterComponent implements OnInit, OnDestroy {
         this.toGetRarityPersistence();
         this.toGetRarityOrderPersistence();
         this.updateInputText('');
+        this.updateBackUpNavbar(res.cards);
       },
       error: (err) => {
         alert('ocurrió un error en la petición getAllCards');
