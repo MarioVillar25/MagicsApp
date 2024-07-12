@@ -17,8 +17,8 @@
             <img
               class="cardContainer_cardInfo--imgCard"
               [src]="
-                card.imageUrl
-                  ? card.imageUrl
+                cardInfo.imageUrl
+                  ? cardInfo.imageUrl
                   : '../../../assets/images/reversoCarta.png'
               "
               alt="img"
@@ -42,6 +42,9 @@
                 </div>
               </div>
               <div class="cardContainer_cardInfo--languages--buttonLanguages">
+                <button (click)="changeLanguage('English')">
+                  English
+                </button>
                 <ng-container *ngFor="let language of card.foreignNames">
                   <button (click)="changeLanguage(language.language)">
                     {{ language.language }}

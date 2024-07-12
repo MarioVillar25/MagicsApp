@@ -7,6 +7,17 @@
   gap: 7px;
 }
 
+.resultsContainerCounter {
+  padding: 4vh 23vw;
+  display: flex;
+  flex-wrap: wrap;
+
+  span{
+    margin-top: 5px;
+    font-weight: 400;
+  }
+}
+
 .resultsContainer {
   padding: 1vh 23vw;
   background-color: var(--soft-white-blue);
@@ -31,6 +42,10 @@
   }
 
   .resultsContainer {
+    padding: 1vh 13vw;
+  }
+
+  .resultsContainerCounter {
     padding: 1vh 13vw;
   }
 }

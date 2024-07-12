@@ -25,6 +25,7 @@ export class CardPageComponent implements OnInit, OnDestroy {
     type: '',
     description: '',
     language: '',
+    imageUrl: '',
   };
   //* CONSTRUCTOR:
 
@@ -59,6 +60,7 @@ export class CardPageComponent implements OnInit, OnDestroy {
             type: res.card.type,
             description: res.card.text,
             language: 'English',
+            imageUrl: res.card.imageUrl,
           };
           return (this.card = res.card);
         },
@@ -74,6 +76,16 @@ export class CardPageComponent implements OnInit, OnDestroy {
 
   public changeLanguage(language: string) {
     switch (language) {
+      case 'English':
+        this.cardInfo = {
+          name: this.card!.name,
+          type: this.card!.type,
+          description: this.card!.text,
+          language: 'English',
+          imageUrl: this.card!.imageUrl,
+        };
+        break;
+
       case this.card?.foreignNames[0].language:
         this.changeCardLanguage(0);
 
@@ -119,6 +131,7 @@ export class CardPageComponent implements OnInit, OnDestroy {
       type: this.card!.foreignNames[value].type,
       description: this.card!.foreignNames[value].text,
       language: this.card!.foreignNames[value].language,
+      imageUrl: this.card!.foreignNames[value].imageUrl,
     };
   }
 }
