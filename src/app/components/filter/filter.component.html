@@ -26,10 +26,10 @@
       </select>
     </div>
     <div class="filterContainer_pagination">
-      <button (click)="firstPage()">|<<</button>
-      <button (click)="previousPage()">< Previous</button>
-      <button (click)="nextPage()">Next 100 ></button>
-      <button (click)="lastPage()">>>|</button>
+      <button [disabled]="currentPage === 1" (click)="firstPage()">|<<</button>
+      <button [disabled]="currentPage === 1" (click)="previousPage()">< Previous</button>
+      <button [disabled]="currentPage === 937" (click)="nextPage()">Next 100 ></button>
+      <button [disabled]="currentPage === 937" (click)="lastPage()">>>|</button>
     </div>
   </div>
 </section>

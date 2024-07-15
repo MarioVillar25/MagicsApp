@@ -31,6 +31,11 @@ export class FilterComponent implements OnInit, OnDestroy {
   public orderRarity: string = '';
   public cardsBackUp: Card[] = this.cardsService.cards;
 
+  get currentPage(){
+    return this.cardsService.currentPage;
+
+  }
+
   //* CONSTRUCTOR:
 
   constructor(private cardsService: CardsService) {}

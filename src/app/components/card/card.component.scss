@@ -1,6 +1,17 @@
+/* tags Styles */
+
+/* span {
+  padding: 10px;
+  background-color: rgb(43, 43, 104);
+  color: white;
+  border-radius: 10px;
+} */
+
 /* Classes Styles */
 
 .card {
+  display: flex;
+  flex-direction: column;
   width: 227px;
   height: 310px;
   border-radius: 6px;
