@@ -52,3 +52,21 @@ hr {
   }
 }
 
+@media (width <= 720px) {
+  .footerContainer {
+    padding: 4vh 6vw;
+  }
+}
+
+
+
+
+@media (width <= 354px) {
+  .footerContainer {
+  .footerContainer__sections{
+    justify-content: center;
+    text-align: center;
+  }
+}
+}
+

@@ -14,8 +14,6 @@ input {
   font-size: 0.9rem;
   //background-color: red;
   width: 35vw;
-
-
 }
 
 textarea:focus,
@@ -74,7 +72,6 @@ input:focus {
   }
 }
 
-
 /* Media Queries */
 
 @media (width <= 1316px) {
@@ -83,3 +80,17 @@ input:focus {
   }
 }
 
+@media (width <= 720px) {
+  nav {
+    padding: 1vh 6vw;
+  }
+}
+
+@media (width <= 560px) {
+  .navContainer {
+    flex-wrap: wrap;
+    .navContainer_colores {
+      margin-top: 10px;
+    }
+  }
+}

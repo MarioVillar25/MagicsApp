@@ -56,7 +56,7 @@ select:hover {
     align-items: center;
     gap: 5px;
 
-    select{
+    select {
       width: 7rem;
     }
   }
@@ -73,5 +73,42 @@ select:hover {
 @media (width <= 1316px) {
   section {
     padding: 1vh 13vw;
+  }
+}
+
+@media (width <= 720px) {
+  section {
+    padding: 1vh 6vw;
+  }
+  .filterContainer {
+    gap: 5px;
+    justify-content: center;
+
+    .filterContainer_filters{
+
+
+      .filterContainer_filters_sortedBy{
+        display: none;
+      }
+    }
+
+
+
+
+  }
+}
+
+@media (width <= 560px) {
+  section {
+    padding: 1vh 6vw;
+  }
+
+  .filterContainer {
+
+    .filterContainer_filters {
+      select {
+        width: 100%;
+      }
+    }
   }
 }
