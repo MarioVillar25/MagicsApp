@@ -1,28 +1,79 @@
-# Magic
+# Magic The Gathering App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+This project is an application developed in Angular 17 that provides a list of magic cards. The application displays top 100 magic cards on the main page. Each card allows access to detailed information about the card, including the stats that belong to it.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Landing Page**: Displays 100 magic cards with basic information.
+- **Detailed Information**: Clicking on a card provides detailed information about the card and related stats.
+- **Modular Structure**: The application is organized into folders to facilitate maintenance and scalability.
 
-## Code scaffolding
+## Folder Structure
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The project folder structure is as follows:
 
-## Build
+- `src/app`
+  - `pages/` : Contains the main pages of the application.
+  - `components/` : Contains reusable components.
+  - `layout/` : Contains components related to the application's layout (e.g., header, footer).
+  - `services/` : Contains the application's services to handle business logic and API calls.
+  - `utils/` : Contains utilities and helper functions.
+  - `environments/` : Contains configuration files for different environments (e.g., development, production).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installation
 
-## Running unit tests
+To clone and run this application, follow these steps:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Clone this repository into a folder where you want to save the project:
+    ```bash
+    git clone https://github.com/MarioVillar25/MagicsApp.git
+    ```
 
-## Running end-to-end tests
+2. Navigate to the project directory:
+    ```bash
+    cd projectFolderName
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. Install the project dependencies:
+    ```bash
+    npm install
+    ```
 
-## Further help
+## Usage
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-"# MagicsApp" 
+To run the application in a development environment, use the following command:
+```bash
+ng serve
+```
+
+## Contributing
+
+I accept different types of contributions, including some that don't require you to write a single line of code. For detailed instructions on how to get started with my project, see "[About contributing to GitHub Docs](https://docs.github.com/en/contributing/collaborating-on-github-docs/about-contributing-to-github-docs)."
+
+
+## License
+
+Copyright (c) 2017 Lob.com
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+

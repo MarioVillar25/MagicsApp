@@ -42,9 +42,7 @@
                 </div>
               </div>
               <div class="cardContainer_cardInfo--languages--buttonLanguages">
-                <button (click)="changeLanguage('English')">
-                  English
-                </button>
+                <button (click)="changeLanguage('English')">English</button>
                 <ng-container *ngFor="let language of card.foreignNames">
                   <button (click)="changeLanguage(language.language)">
                     {{ language.language }}
@@ -72,7 +70,7 @@
             <div class="cardContainer_cardInfo--descriptions">
               <div>
                 <div>
-                  <h4>{{ cardInfo.name  }}</h4>
+                  <h4>{{ cardInfo.name }}</h4>
                 </div>
               </div>
               <hr />
@@ -275,18 +273,22 @@
     <section *ngIf="card">
       <div class="notesContainer">
         <div class="notesContainer__header">
-          <h2>NOTES AND RULES INFORMATION FOR</h2>
-          <span>{{ card.name | uppercase }}</span> :
+          <h2>
+            NOTES AND RULES INFORMATION FOR
+            <span>{{ card.name | uppercase }}</span> :
+          </h2>
         </div>
 
         <br />
 
         <ng-container *ngIf="card.rulings; else rules">
           <div>
-            <p>{{ card.rulings[0].text }}</p>
-            <span class="notesContainer__date"
-              >({{ card.rulings[0].date }})</span
-            >
+            <p>
+              {{ card.rulings[0].text }}
+              <span class="notesContainer__date"
+                >({{ card.rulings[0].date }})</span
+              >
+            </p>
           </div>
         </ng-container>
 
